@@ -11,6 +11,7 @@ class MultiChildWidget extends StatelessWidget {
 
         // height: MediaQuery.of(context).size.height,
         // width: double.infinity,
+        
         child: customProfileStack(),
         // child: customStack(),
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_course/tab_bar_lecture.dart';
 
 import 'buttons_lecture.dart';
+import 'form_widgets.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  TabBarLecture(),
+      home:  FormWidget(),
     );
   }
 }
