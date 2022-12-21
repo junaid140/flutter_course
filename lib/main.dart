@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_course/screens/animationscreens/animation_screen.dart';
 import 'package:flutter_course/screens/onboardingScreen/onboarding_screen.dart';
 import 'package:flutter_course/tab_bar_lecture.dart';
 
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  OnboardingScreen(),
+      home:  SplashScreen(),
     );
   }
 }
