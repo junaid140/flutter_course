@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_course/screens/24_dec/24dec.dart';
 import 'package:flutter_course/screens/animationscreens/animation_screen.dart';
 import 'package:flutter_course/screens/onboardingScreen/onboarding_screen.dart';
 import 'package:flutter_course/screens/packagesList.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  PackagesExamples(),
+      home:  CheckFont(),
     );
   }
 }
