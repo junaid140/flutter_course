@@ -14,6 +14,7 @@ class HorizanalPackage extends StatefulWidget {
 class _HorizanalPackageState extends State<HorizanalPackage> {
 
   int rowsPerPage = 10;
+
   final source = ExampleSource();
   @override
   Widget build(BuildContext context) {

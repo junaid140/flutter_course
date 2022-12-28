@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_course/screens/24_dec/24dec.dart';
 import 'package:flutter_course/screens/27_dec/27_dec.dart';
+import 'package:flutter_course/screens/28_dec/28_dec.dart';
 import 'package:flutter_course/screens/animationscreens/animation_screen.dart';
 import 'package:flutter_course/screens/onboardingScreen/onboarding_screen.dart';
 import 'package:flutter_course/screens/packagesList.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  HorizanalPackage(),
+      home:  Dec28Lecture(),
     );
   }
 }
