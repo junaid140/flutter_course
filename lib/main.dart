@@ -6,15 +6,19 @@ import 'package:flutter_course/screens/28_dec/28_dec.dart';
 import 'package:flutter_course/screens/animationscreens/animation_screen.dart';
 import 'package:flutter_course/screens/onboardingScreen/onboarding_screen.dart';
 import 'package:flutter_course/screens/packagesList.dart';
+import 'package:flutter_course/screens/signUp/signup.dart';
 import 'package:flutter_course/tab_bar_lecture.dart';
 
 import '19dec.dart';
 import 'buttons_lecture.dart';
 import 'form_widgets.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 late List<CameraDescription> cameras;
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   cameras = await availableCameras();
   runApp(const MyApp());
@@ -32,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  Dec28Lecture(),
+      home:  SignUp(),
     );
   }
 }

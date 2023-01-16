@@ -44,7 +44,7 @@ class _Dec28LectureState extends State<Dec28Lecture> {
             onTap: (){
               FlutterClipboard.copy('$value').then(( value ) => print('copied'));
             },
-            child: Text(value)),
+            child: Container()),
       ),
 
     );
