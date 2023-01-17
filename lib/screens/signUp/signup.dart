@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -10,6 +11,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  GoogleSignIn googleSignIn = GoogleSignIn();
+
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -86,8 +89,61 @@ class _SignUpState extends State<SignUp> {
 
                   }
 
-                }, child: Text("SignUp"))
+                }, child: Text("SignUp")),
 
+                ElevatedButton(
+                onPressed: ()async{
+                 try {
+                        GoogleSignIn _googleSignIn = GoogleSignIn();
+                        GoogleSignInAccount? googleAccount =
+                            await _googleSignIn.signIn();
+                        GoogleSignInAuthentication? googleSignInAuthentication =
+                            await googleAccount!.authentication;
+
+                        OAuthCredential googleAuthProvider =
+                            GoogleAuthProvider.credential(
+                                idToken: googleSignInAuthentication.idToken,
+                                accessToken:
+                                    googleSignInAuthentication.accessToken);
+
+                        UserCredential userCredential = await FirebaseAuth
+                            .instance
+                            .signInWithCredential(googleAuthProvider);
+                        User? user = userCredential.user;
+                        if(user!.uid.isNotEmpty){
+                          FirebaseFirestore.instance.collection("user").where("uid",isEqualTo: user.uid).get().then((value) async{
+                            if(value.docs.isEmpty){
+                              await FirebaseFirestore.instance.collection("user").doc("${user.uid}")
+                                  .set({
+                                "email":user.email,
+                                "uid":user.uid
+                              });
+
+                            }
+                            else{
+                              print("User Exist");
+                            }
+                          });
+                        }
+
+                      }catch(e){
+                   print(e);
+                 }
+                    }, child: Text("Signin With google")),
+                FirebaseAuth.instance.currentUser!.uid.isNotEmpty? ElevatedButton(
+                onPressed: ()async{
+                 try {
+                   print("------");
+                  await googleSignIn.signOut();
+                  await FirebaseAuth.instance.signOut();
+
+                      }catch(e){
+                   print(e);
+                 }
+                    }, child: Text("SignOut google")):Container(),
+                ElevatedButton(onPressed: (){
+                  print(   FirebaseAuth.instance.currentUser!.uid);
+                }, child: Text("Print UID"))
               ],
             ),
           ),
