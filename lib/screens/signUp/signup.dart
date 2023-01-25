@@ -71,7 +71,10 @@ class _SignUpState extends State<SignUp> {
                   try{
                   UserCredential userCredential =   await FirebaseAuth.instance.createUserWithEmailAndPassword(
                         email: email.text, password: password.text);
-                User user =   userCredential.user!;
+
+
+                  User user =   userCredential.user!;
+
                 if(user.uid.isNotEmpty){
                   print("User has been Created");
                   await FirebaseFirestore.instance.collection("user").doc("${user.uid}")
@@ -152,4 +155,8 @@ class _SignUpState extends State<SignUp> {
 
     );
   }
+}
+
+
+firebaseFirestore()async{
 }
