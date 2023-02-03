@@ -93,7 +93,7 @@ class TabBarLecture extends StatelessWidget {
                  return ListTile(
                  onTap: (){
                   print("sjbdchshj");
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatRoom(userId: usersList[index]["id"],)));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatRoom(userId: usersList[index]["id"],)));
                   // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ChatRoom()));
                   // Navigator.pop(context);
                   },

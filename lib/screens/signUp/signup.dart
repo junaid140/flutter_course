@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_course/screens/users.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class SignUp extends StatefulWidget {
@@ -69,7 +70,7 @@ class _SignUpState extends State<SignUp> {
                 ElevatedButton(onPressed: ()async{
                   print("-----");
                   try{
-                  UserCredential userCredential =   await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                  UserCredential userCredential =   await FirebaseAuth.instance.signInWithEmailAndPassword(
                         email: email.text, password: password.text);
 
 
@@ -77,13 +78,17 @@ class _SignUpState extends State<SignUp> {
 
                 if(user.uid.isNotEmpty){
                   print("User has been Created");
-                  await FirebaseFirestore.instance.collection("user").doc("${user.uid}")
-                      .set({
-                    "email":user.email,
-                    "uid":user.uid
-                  });
+                  // await FirebaseFirestore.instance.collection("user").doc("${user.uid}")
+                  //     .set({
+                  //   "email":user.email,
+                  //   "uid":user.uid
+                  // });
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ALlUsers()));
 
                   print(user);
+                }
+                else{
+
                 }
 
                   }
