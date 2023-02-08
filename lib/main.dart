@@ -8,6 +8,7 @@ import 'package:flutter_course/screens/onboardingScreen/onboarding_screen.dart';
 import 'package:flutter_course/screens/packagesList.dart';
 import 'package:flutter_course/screens/phonelogin.dart';
 import 'package:flutter_course/screens/signUp/signup.dart';
+import 'package:flutter_course/screens/user/user_list.dart';
 import 'package:flutter_course/screens/users.dart';
 import 'package:flutter_course/tab_bar_lecture.dart';
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  SignUp(),
+      home:  UserList(),
     );
   }
 }
