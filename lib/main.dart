@@ -4,9 +4,11 @@ import 'package:flutter_course/screens/24_dec/24dec.dart';
 import 'package:flutter_course/screens/27_dec/27_dec.dart';
 import 'package:flutter_course/screens/28_dec/28_dec.dart';
 import 'package:flutter_course/screens/animationscreens/animation_screen.dart';
+import 'package:flutter_course/screens/login/login.dart';
 import 'package:flutter_course/screens/onboardingScreen/onboarding_screen.dart';
 import 'package:flutter_course/screens/packagesList.dart';
 import 'package:flutter_course/screens/phonelogin.dart';
+import 'package:flutter_course/screens/product/product.dart';
 import 'package:flutter_course/screens/signUp/signup.dart';
 import 'package:flutter_course/screens/user/user_list.dart';
 import 'package:flutter_course/screens/users.dart';
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  UserList(),
+      home:  Product(),
     );
   }
 }
