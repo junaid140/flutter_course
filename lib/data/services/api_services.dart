@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart'as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utill/app_constents.dart';
 import '../models/user.dart';
@@ -8,27 +9,42 @@ import '../models/user.dart';
 class ApiServices{
 
 
-  Future<List<User>> getAllUser()async{
-    var response = await http.get(Uri.parse("${AppConstants.user}"));
+  Future getAllUser()async{
+    SharedPreferences preferences =await SharedPreferences.getInstance();
+    String? token = preferences.getString(AppConstants.token);
+    var response = await http.get(
+        Uri.parse("${AppConstants.nAUrl}"),
+        headers: {
+          "Authorization":"Bearer $token",
+          "Content-Type":"application/json"
+        }
+    );
+    print(response.body);
     var jsonData = jsonDecode(response.body);
-    List<User> allUsers = [] ;
-    for(var data in jsonData){
-      allUsers.add(User.fromJson(data));
-    }
-    return allUsers;
+
+    return jsonData["data"]["docs"];
   }
-  Future<User> getUser(id)async{
-    var response = await http.get(Uri.parse("${AppConstants.user}/$id"));
+  Future getUser(id)async{
+    SharedPreferences preferences =await SharedPreferences.getInstance();
+    String? token = preferences.getString(AppConstants.token);
+    var response = await http.get(Uri.parse("${AppConstants.nAUrl}/$id"),
+        headers: {
+          "Authorization":"Bearer $token",
+          "Content-Type":"application/json"
+        }
+    );
+    print(response.body);
     var jsonData = jsonDecode(response.body);
    User user = User.fromJson(jsonData);
-    return user;
+    return jsonData["data"]["doc"];
   }
 
   Future login(email,password)async{
+    SharedPreferences preferences =await SharedPreferences.getInstance();
     print("====");
     var response = await http.post(
-        Uri.parse("${AppConstants.login1}"),
-    body: json.encode({"email": "$email", "password": "$password"},),
+        Uri.parse("${AppConstants.adminLogin}"),
+    body: json.encode({"username": "$email", "password": "$password"},),
       headers: {
           "Content-Type":"application/json"
       }
@@ -37,6 +53,8 @@ class ApiServices{
 
     print(jsonData);
     if(response.statusCode==200){
+      preferences.setString(AppConstants.token, jsonData["data"]["token"]);
+
       return jsonData;
     }
     else{
@@ -99,6 +117,60 @@ class ApiServices{
     else{
 
     }
+  }
+  Future createNA(name)async{
+    SharedPreferences preferences =await SharedPreferences.getInstance();
+    String? token = preferences.getString(AppConstants.token);
+
+    print("====");
+    var response = await http.post(
+        Uri.parse("${AppConstants.nAUrl}"),
+        body:
+            jsonEncode( {"name" : "$name",}),
+        headers: {
+          "Authorization":"Bearer $token",
+          "Content-Type":"application/json"
+        }
+    );
+    var jsonData = jsonDecode(response.body);
+
+    print(jsonData);
+    if(response.statusCode==200){
+      return jsonData;
+    }
+    else{
+
+    }
+  }
+
+  Future updateNA(id,name)async{
+    SharedPreferences preferences =await SharedPreferences.getInstance();
+    String? token = preferences.getString(AppConstants.token);
+    var response = await http.put(Uri.parse("${AppConstants.nAUrl}/$id"),
+        body:  jsonEncode( {"name" : "$name",}),
+        headers: {
+          "Authorization":"Bearer $token",
+          "Content-Type":"application/json"
+        }
+    );
+    print(response.body);
+    var jsonData = jsonDecode(response.body);
+    User user = User.fromJson(jsonData);
+    return jsonData["data"]["doc"];
+  }
+  Future daleteNA(id)async{
+    SharedPreferences preferences =await SharedPreferences.getInstance();
+    String? token = preferences.getString(AppConstants.token);
+    var response = await http.delete(Uri.parse("${AppConstants.nAUrl}/$id"),
+        headers: {
+          "Authorization":"Bearer $token",
+          "Content-Type":"application/json"
+        }
+    );
+    print(response.body);
+    var jsonData = jsonDecode(response.body);
+    User user = User.fromJson(jsonData);
+    return jsonData["data"];
   }
 
 }

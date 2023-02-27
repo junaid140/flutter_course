@@ -20,16 +20,16 @@ class _UserProfileState extends State<UserProfile> {
         title: Text("User Profile"),
       ),
       body: Container(
-        child: FutureBuilder<User>(
+        child: FutureBuilder(
           future: apiServices.getUser(widget.userId),
-          builder: (context,AsyncSnapshot<User> snapshot){
+          builder: (context,AsyncSnapshot snapshot){
             return snapshot.hasData?
             ListView(
                 children: [
                   ListTile(
-                    leading: Text("${snapshot.data!.id}"),
-                    title: Text("${snapshot.data!.username}"),
-                    subtitle: Text("${snapshot.data!.email}"),
+                    leading: Text("${snapshot.data!["_id"]}"),
+                    title: Text("${snapshot.data!["name"]}"),
+                    subtitle: Text("${snapshot.data!["name"]}"),
                   )
                 ],):Center(child: CircularProgressIndicator(),);
 
