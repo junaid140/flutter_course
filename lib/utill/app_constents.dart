@@ -20,8 +20,6 @@ class AppConstants{
   static const String adminLogin = "$adminUrl/login";
   static const String nAUrl = "$baseUrl/NA";
 
-
-
   //static Variables
   static const String token = "token";
 
