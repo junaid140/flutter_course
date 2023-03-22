@@ -20,6 +20,8 @@ import 'buttons_lecture.dart';
 import 'form_widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'screens/profile/upload_profile.dart';
+
 late List<CameraDescription> cameras;
 
 void main() async{
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  UploadFile(),
+      home:  UploadProfile(),
     );
   }
 }
